@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'milking_screen.dart';
-import 'home_screen.dart';
-import 'package:dairy_farm/application/milking_data.dart';
+import 'package:dairy_farm/screens/milking_screen.dart';
+import 'package:dairy_farm/screens/home_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'screens/milking_screen_revised.dart';
 
 void main() {
   runApp(DairyApp());

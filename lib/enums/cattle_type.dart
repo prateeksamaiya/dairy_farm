@@ -1,6 +1,6 @@
-enum cattleType { Cow, Buffalo }
+enum CattleType { Cow, Buffalo }
 
-extension ParseToString on cattleType {
+extension ParseToString on CattleType {
   String toShortString() {
     return this.toString().split('.').last;
   }

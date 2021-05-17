@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:dairy_farm/milking_screen.dart';
-import 'package:dairy_farm/home_screen.dart';
+import 'package:dairy_farm/screens/milking_screen.dart';
+import 'package:dairy_farm/screens/home_screen.dart';
 
 class MainDrawer extends StatelessWidget {
 
