@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class MyDataTable extends StatelessWidget {
-  final List<String> columnHeaders = ["Cattle", "Quantity (l)l"];
-  final String tableHeading = "Today's Report";
+class AggregateDataTable extends StatelessWidget {
+  final List<String> columnHeaders;
+  final String tableHeading;
   final rowData;
 
-  MyDataTable({this.rowData});
+  AggregateDataTable({this.columnHeaders,this.tableHeading,this.rowData});
 
   @override
   Widget build(BuildContext context) {

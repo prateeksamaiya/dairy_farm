@@ -1,4 +1,4 @@
-import 'package:dairy_farm/components/dataTable.dart';
+import 'package:dairy_farm/components/aggreagatedDataTable.dart';
 import 'package:dairy_farm/components/my_scaffold.dart';
 import 'package:dairy_farm/enums/cattle_type.dart';
 import 'package:dairy_farm/models/milking_entry.dart';
@@ -10,13 +10,18 @@ import '../provider.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String id = "home";
+  final List<String> columnHeaders = ["Cattle Type", "Quantity (L)"];
+  final String tableHeading = "Today's Report";
 
-  totalCounts(List<MilkingEntry> entries) {
+  totalCounts(List<MilkingEntry> milkingEntries) {
+
+    print((Map<String, dynamic>.from(milkingEntries.first.toJson()).keys.toList()));
+    print((Map<String, dynamic>.from(milkingEntries.first.toJson())["milker"]));
     double cowTotalMilk = 0;
     double buffaloTotalMilk = 0;
     double totalMilk = 0;
 
-    for (MilkingEntry entry in entries) {
+    for (MilkingEntry entry in milkingEntries) {
       if (entry.cattleType == CattleType.Buffalo.toShortString()) {
         buffaloTotalMilk += entry.milkQuantity;
       }
@@ -40,7 +45,7 @@ class HomeScreen extends StatelessWidget {
       final milkEntries = watch(milkingDataProvider.state);
       print("building consumer homeScreen");
       return milkEntries.when(
-          data: (milkingEntries) => MyDataTable(rowData: totalCounts(milkingEntries)),
+          data: (milkingEntries) => AggregateDataTable(rowData: totalCounts(milkingEntries),columnHeaders:columnHeaders,tableHeading: tableHeading),
           loading: () => Center(child: CircularProgressIndicator()),
           error: (e, s) => Text(e.toString()));
     }));
