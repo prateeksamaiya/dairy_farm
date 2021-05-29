@@ -13,7 +13,7 @@ class MilkingListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("building HomeScreen");
-    return MyScaffold(body: Consumer(builder: (context, watch, child) {
+    return MyScaffold( Consumer(builder: (context, watch, child) {
       final milkEntries = watch(milkingDataProvider.state);
       print("building consumer homeScreen");
       return milkEntries.when(

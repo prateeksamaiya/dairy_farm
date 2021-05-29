@@ -19,7 +19,10 @@ class MilkingScreen extends HookWidget {
   final milkQuantityController = TextEditingController();
 
   void showSnackbar(context, Widget widget) {
-    final snackBar = SnackBar(content: widget,duration: Duration(milliseconds: 1000),);
+    final snackBar = SnackBar(
+      content: widget,
+      duration: Duration(milliseconds: 1000),
+    );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
     return;
   }
@@ -29,8 +32,7 @@ class MilkingScreen extends HookWidget {
     print("building MilkingScreen");
     MilkingEntry milkingEntry = useProvider(milkEntryProvider).state;
     bool isButtonPressed = useProvider(buttonPressed).state;
-    return MyScaffold(
-        body: ProviderListener(
+    return MyScaffold(ProviderListener(
       provider: clientStatus,
       onChange: (
         BuildContext context,

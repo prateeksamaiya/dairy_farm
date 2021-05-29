@@ -34,7 +34,8 @@ part 'milking_entry.g.dart';
 @freezed
 abstract class MilkingEntry with _$MilkingEntry {
   const factory MilkingEntry(
-    [@Default("Buffalo")String cattleType,
+    [@JsonKey(name:'_id') Map<String,String> dataBaseId,
+      @Default("Buffalo")String cattleType,
     @Default(1) int cattleNumber,
     @Default(0.0)double milkQuantity,
     @Default("Manish Samaiya") String milker]

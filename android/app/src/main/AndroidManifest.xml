@@ -2,6 +2,7 @@
     package="com.dairy.binadoodh.dairy_farm">
    <application
         android:label="dairy_farm"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

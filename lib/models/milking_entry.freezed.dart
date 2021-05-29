@@ -18,11 +18,13 @@ class _$MilkingEntryTearOff {
 
 // ignore: unused_element
   _MilkingEntry call(
-      [String cattleType = "Buffalo",
+      [@JsonKey(name: '_id') Map<String, String> dataBaseId,
+      String cattleType = "Buffalo",
       int cattleNumber = 1,
       double milkQuantity = 0.0,
       String milker = "Manish Samaiya"]) {
     return _MilkingEntry(
+      dataBaseId,
       cattleType,
       cattleNumber,
       milkQuantity,
@@ -42,6 +44,8 @@ const $MilkingEntry = _$MilkingEntryTearOff();
 
 /// @nodoc
 mixin _$MilkingEntry {
+  @JsonKey(name: '_id')
+  Map<String, String> get dataBaseId;
   String get cattleType;
   int get cattleNumber;
   double get milkQuantity;
@@ -58,7 +62,8 @@ abstract class $MilkingEntryCopyWith<$Res> {
           MilkingEntry value, $Res Function(MilkingEntry) then) =
       _$MilkingEntryCopyWithImpl<$Res>;
   $Res call(
-      {String cattleType,
+      {@JsonKey(name: '_id') Map<String, String> dataBaseId,
+      String cattleType,
       int cattleNumber,
       double milkQuantity,
       String milker});
@@ -74,12 +79,16 @@ class _$MilkingEntryCopyWithImpl<$Res> implements $MilkingEntryCopyWith<$Res> {
 
   @override
   $Res call({
+    Object dataBaseId = freezed,
     Object cattleType = freezed,
     Object cattleNumber = freezed,
     Object milkQuantity = freezed,
     Object milker = freezed,
   }) {
     return _then(_value.copyWith(
+      dataBaseId: dataBaseId == freezed
+          ? _value.dataBaseId
+          : dataBaseId as Map<String, String>,
       cattleType:
           cattleType == freezed ? _value.cattleType : cattleType as String,
       cattleNumber:
@@ -100,7 +109,8 @@ abstract class _$MilkingEntryCopyWith<$Res>
       __$MilkingEntryCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String cattleType,
+      {@JsonKey(name: '_id') Map<String, String> dataBaseId,
+      String cattleType,
       int cattleNumber,
       double milkQuantity,
       String milker});
@@ -118,12 +128,16 @@ class __$MilkingEntryCopyWithImpl<$Res> extends _$MilkingEntryCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object dataBaseId = freezed,
     Object cattleType = freezed,
     Object cattleNumber = freezed,
     Object milkQuantity = freezed,
     Object milker = freezed,
   }) {
     return _then(_MilkingEntry(
+      dataBaseId == freezed
+          ? _value.dataBaseId
+          : dataBaseId as Map<String, String>,
       cattleType == freezed ? _value.cattleType : cattleType as String,
       cattleNumber == freezed ? _value.cattleNumber : cattleNumber as int,
       milkQuantity == freezed ? _value.milkQuantity : milkQuantity as double,
@@ -137,7 +151,8 @@ class __$MilkingEntryCopyWithImpl<$Res> extends _$MilkingEntryCopyWithImpl<$Res>
 /// @nodoc
 class _$_MilkingEntry implements _MilkingEntry {
   const _$_MilkingEntry(
-      [this.cattleType = "Buffalo",
+      [@JsonKey(name: '_id') this.dataBaseId,
+      this.cattleType = "Buffalo",
       this.cattleNumber = 1,
       this.milkQuantity = 0.0,
       this.milker = "Manish Samaiya"])
@@ -149,6 +164,9 @@ class _$_MilkingEntry implements _MilkingEntry {
   factory _$_MilkingEntry.fromJson(Map<String, dynamic> json) =>
       _$_$_MilkingEntryFromJson(json);
 
+  @override
+  @JsonKey(name: '_id')
+  final Map<String, String> dataBaseId;
   @JsonKey(defaultValue: "Buffalo")
   @override
   final String cattleType;
@@ -164,13 +182,16 @@ class _$_MilkingEntry implements _MilkingEntry {
 
   @override
   String toString() {
-    return 'MilkingEntry(cattleType: $cattleType, cattleNumber: $cattleNumber, milkQuantity: $milkQuantity, milker: $milker)';
+    return 'MilkingEntry(dataBaseId: $dataBaseId, cattleType: $cattleType, cattleNumber: $cattleNumber, milkQuantity: $milkQuantity, milker: $milker)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _MilkingEntry &&
+            (identical(other.dataBaseId, dataBaseId) ||
+                const DeepCollectionEquality()
+                    .equals(other.dataBaseId, dataBaseId)) &&
             (identical(other.cattleType, cattleType) ||
                 const DeepCollectionEquality()
                     .equals(other.cattleType, cattleType)) &&
@@ -187,6 +208,7 @@ class _$_MilkingEntry implements _MilkingEntry {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(dataBaseId) ^
       const DeepCollectionEquality().hash(cattleType) ^
       const DeepCollectionEquality().hash(cattleNumber) ^
       const DeepCollectionEquality().hash(milkQuantity) ^
@@ -205,7 +227,8 @@ class _$_MilkingEntry implements _MilkingEntry {
 
 abstract class _MilkingEntry implements MilkingEntry {
   const factory _MilkingEntry(
-      [String cattleType,
+      [@JsonKey(name: '_id') Map<String, String> dataBaseId,
+      String cattleType,
       int cattleNumber,
       double milkQuantity,
       String milker]) = _$_MilkingEntry;
@@ -213,6 +236,9 @@ abstract class _MilkingEntry implements MilkingEntry {
   factory _MilkingEntry.fromJson(Map<String, dynamic> json) =
       _$_MilkingEntry.fromJson;
 
+  @override
+  @JsonKey(name: '_id')
+  Map<String, String> get dataBaseId;
   @override
   String get cattleType;
   @override

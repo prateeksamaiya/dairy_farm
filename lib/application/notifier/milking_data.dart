@@ -10,6 +10,10 @@ class MilkingDataNotifier extends StateNotifier<AsyncValue<List<MilkingEntry>>> 
 
   Reader serverClientReader;
 
+  reload(){
+    _loadMilkingEntry();
+  }
+
   _loadMilkingEntry() async {
     try {
       List<MilkingEntry> entries = await serverClientReader(serverClient).populateFromServer();

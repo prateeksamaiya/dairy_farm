@@ -14,26 +14,27 @@ class HomeScreen extends StatelessWidget {
   final String tableHeading = "Today's Report";
 
   totalCounts(List<MilkingEntry> milkingEntries) {
-
-    print((Map<String, dynamic>.from(milkingEntries.first.toJson()).keys.toList()));
-    print((Map<String, dynamic>.from(milkingEntries.first.toJson())["milker"]));
     double cowTotalMilk = 0;
     double buffaloTotalMilk = 0;
     double totalMilk = 0;
+    int cow_count = 0;
+    int buffalo_count = 0;
 
     for (MilkingEntry entry in milkingEntries) {
       if (entry.cattleType == CattleType.Buffalo.toShortString()) {
         buffaloTotalMilk += entry.milkQuantity;
+        buffalo_count++;
       }
 
       if (entry.cattleType == CattleType.Cow.toShortString()) {
         cowTotalMilk += entry.milkQuantity;
+        cow_count++;
       }
       totalMilk += entry.milkQuantity;
     }
     return {
-      CattleType.Cow.toShortString(): cowTotalMilk.toString(),
-      CattleType.Buffalo.toShortString(): buffaloTotalMilk.toString(),
+      CattleType.Cow.toShortString() + " (" + cow_count.toString() + ")": cowTotalMilk.toString(),
+      CattleType.Buffalo.toShortString() + " (" + buffalo_count.toString() + ")": buffaloTotalMilk.toString(),
       kTotal: totalMilk.toString(),
     };
   }
@@ -41,13 +42,14 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("building HomeScreen");
-    return MyScaffold(body: Consumer(builder: (context, watch, child) {
+    return MyScaffold(Consumer(builder: (context, watch, child) {
       final milkEntries = watch(milkingDataProvider.state);
       print("building consumer homeScreen");
       return milkEntries.when(
-          data: (milkingEntries) => AggregateDataTable(rowData: totalCounts(milkingEntries),columnHeaders:columnHeaders,tableHeading: tableHeading),
+          data: (milkingEntries) => AggregateDataTable(
+              rowData: totalCounts(milkingEntries), columnHeaders: columnHeaders, tableHeading: tableHeading),
           loading: () => Center(child: CircularProgressIndicator()),
           error: (e, s) => Text(e.toString()));
-    }));
+    }), () => {context.read(milkingDataProvider).reload()});
   }
 }

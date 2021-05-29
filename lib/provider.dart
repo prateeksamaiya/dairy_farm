@@ -18,3 +18,5 @@ final serverClient = Provider((ref) => MilkingDataClient(ref.read));
 final clientStatus = StateProvider.autoDispose<AsyncValue<String>>((ref) => null);
 
 final milkingDataProvider = StateNotifierProvider((ref) => MilkingDataNotifier(ref.read));
+
+final navigation_select = StateProvider<int>((ref) => 0);
