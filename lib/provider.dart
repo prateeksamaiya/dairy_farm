@@ -26,3 +26,6 @@ StateProvider<MilkingEntry> milkEntryProvider = StateProvider<MilkingEntry>((ref
 final milkingDataProvider = StateNotifierProvider((ref) => MilkingDataNotifier(ref.read));
 
 
+
+
+

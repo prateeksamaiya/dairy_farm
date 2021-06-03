@@ -20,15 +20,7 @@ class MyDropDownButton extends StatelessWidget {
       items: items.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
-          child: Row(
-            children: [
-              itemIcon,
-              SizedBox(
-                width: 10.0,
-              ),
-              Text(value)
-            ],
-          ),
+          child: Text(value),
         );
       }).toList(),
     );

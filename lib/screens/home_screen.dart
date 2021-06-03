@@ -59,6 +59,6 @@ class HomeScreen extends StatelessWidget {
               rowData: totalCounts(milkingEntries), columnHeaders: columnHeaders, tableHeading: tableHeading),
           loading: () => Center(child: CircularProgressIndicator()),
           error: (e, s) => Text(e.toString()));
-    }),()=>{context.read(milkingDataProvider).reload()});
+    }), () => {context.read(milkingDataProvider).reload()});
   }
 }
