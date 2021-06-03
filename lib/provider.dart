@@ -12,11 +12,17 @@ import 'package:dairy_farm/util/milking_data_client.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'application/notifier/milking_data.dart';
+import 'models/milking_entry.dart';
 
 final serverClient = Provider((ref) => MilkingDataClient(ref.read));
 
 final clientStatus = StateProvider.autoDispose<AsyncValue<String>>((ref) => null);
 
-final milkingDataProvider = StateNotifierProvider((ref) => MilkingDataNotifier(ref.read));
 
 final navigation_select = StateProvider<int>((ref) => 0);
+
+StateProvider<MilkingEntry> milkEntryProvider = StateProvider<MilkingEntry>((ref) => MilkingEntry());
+
+final milkingDataProvider = StateNotifierProvider((ref) => MilkingDataNotifier(ref.read));
+
+

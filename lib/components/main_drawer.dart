@@ -1,3 +1,4 @@
+import 'package:dairy_farm/models/milking_entry.dart';
 import 'package:dairy_farm/screens/milking_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dairy_farm/screens/milking_screen.dart';
@@ -39,6 +40,7 @@ class MainDrawer extends HookWidget {
             title: Text("Milking"),
             onTap: (){
               context.read(navigation_select).state = 1;
+              context.read(milkEntryProvider).state = MilkingEntry();
               Navigator.pushReplacementNamed(context, MilkingScreen.id);
             },
           ),

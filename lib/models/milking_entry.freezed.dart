@@ -18,16 +18,20 @@ class _$MilkingEntryTearOff {
 
 // ignore: unused_element
   _MilkingEntry call(
-      [@JsonKey(name: '_id') Map<String, String> dataBaseId,
+      [@JsonKey(name: '_id')
+          Map<String, String> dataBaseId,
       String cattleType = "Buffalo",
-      int cattleNumber = 1,
-      double milkQuantity = 0.0,
+      int cattleNumber,
+      int milkQuantity,
+      @JsonKey(name: 'date', fromJson: MilkingEntry._fromJson)
+          DateTime dateTime,
       String milker = "Manish Samaiya"]) {
     return _MilkingEntry(
       dataBaseId,
       cattleType,
       cattleNumber,
       milkQuantity,
+      dateTime,
       milker,
     );
   }
@@ -48,7 +52,9 @@ mixin _$MilkingEntry {
   Map<String, String> get dataBaseId;
   String get cattleType;
   int get cattleNumber;
-  double get milkQuantity;
+  int get milkQuantity;
+  @JsonKey(name: 'date', fromJson: MilkingEntry._fromJson)
+  DateTime get dateTime;
   String get milker;
 
   Map<String, dynamic> toJson();
@@ -62,10 +68,13 @@ abstract class $MilkingEntryCopyWith<$Res> {
           MilkingEntry value, $Res Function(MilkingEntry) then) =
       _$MilkingEntryCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: '_id') Map<String, String> dataBaseId,
+      {@JsonKey(name: '_id')
+          Map<String, String> dataBaseId,
       String cattleType,
       int cattleNumber,
-      double milkQuantity,
+      int milkQuantity,
+      @JsonKey(name: 'date', fromJson: MilkingEntry._fromJson)
+          DateTime dateTime,
       String milker});
 }
 
@@ -83,6 +92,7 @@ class _$MilkingEntryCopyWithImpl<$Res> implements $MilkingEntryCopyWith<$Res> {
     Object cattleType = freezed,
     Object cattleNumber = freezed,
     Object milkQuantity = freezed,
+    Object dateTime = freezed,
     Object milker = freezed,
   }) {
     return _then(_value.copyWith(
@@ -93,9 +103,9 @@ class _$MilkingEntryCopyWithImpl<$Res> implements $MilkingEntryCopyWith<$Res> {
           cattleType == freezed ? _value.cattleType : cattleType as String,
       cattleNumber:
           cattleNumber == freezed ? _value.cattleNumber : cattleNumber as int,
-      milkQuantity: milkQuantity == freezed
-          ? _value.milkQuantity
-          : milkQuantity as double,
+      milkQuantity:
+          milkQuantity == freezed ? _value.milkQuantity : milkQuantity as int,
+      dateTime: dateTime == freezed ? _value.dateTime : dateTime as DateTime,
       milker: milker == freezed ? _value.milker : milker as String,
     ));
   }
@@ -109,10 +119,13 @@ abstract class _$MilkingEntryCopyWith<$Res>
       __$MilkingEntryCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: '_id') Map<String, String> dataBaseId,
+      {@JsonKey(name: '_id')
+          Map<String, String> dataBaseId,
       String cattleType,
       int cattleNumber,
-      double milkQuantity,
+      int milkQuantity,
+      @JsonKey(name: 'date', fromJson: MilkingEntry._fromJson)
+          DateTime dateTime,
       String milker});
 }
 
@@ -132,6 +145,7 @@ class __$MilkingEntryCopyWithImpl<$Res> extends _$MilkingEntryCopyWithImpl<$Res>
     Object cattleType = freezed,
     Object cattleNumber = freezed,
     Object milkQuantity = freezed,
+    Object dateTime = freezed,
     Object milker = freezed,
   }) {
     return _then(_MilkingEntry(
@@ -140,7 +154,8 @@ class __$MilkingEntryCopyWithImpl<$Res> extends _$MilkingEntryCopyWithImpl<$Res>
           : dataBaseId as Map<String, String>,
       cattleType == freezed ? _value.cattleType : cattleType as String,
       cattleNumber == freezed ? _value.cattleNumber : cattleNumber as int,
-      milkQuantity == freezed ? _value.milkQuantity : milkQuantity as double,
+      milkQuantity == freezed ? _value.milkQuantity : milkQuantity as int,
+      dateTime == freezed ? _value.dateTime : dateTime as DateTime,
       milker == freezed ? _value.milker : milker as String,
     ));
   }
@@ -153,12 +168,11 @@ class _$_MilkingEntry implements _MilkingEntry {
   const _$_MilkingEntry(
       [@JsonKey(name: '_id') this.dataBaseId,
       this.cattleType = "Buffalo",
-      this.cattleNumber = 1,
-      this.milkQuantity = 0.0,
+      this.cattleNumber,
+      this.milkQuantity,
+      @JsonKey(name: 'date', fromJson: MilkingEntry._fromJson) this.dateTime,
       this.milker = "Manish Samaiya"])
       : assert(cattleType != null),
-        assert(cattleNumber != null),
-        assert(milkQuantity != null),
         assert(milker != null);
 
   factory _$_MilkingEntry.fromJson(Map<String, dynamic> json) =>
@@ -170,19 +184,20 @@ class _$_MilkingEntry implements _MilkingEntry {
   @JsonKey(defaultValue: "Buffalo")
   @override
   final String cattleType;
-  @JsonKey(defaultValue: 1)
   @override
   final int cattleNumber;
-  @JsonKey(defaultValue: 0.0)
   @override
-  final double milkQuantity;
+  final int milkQuantity;
+  @override
+  @JsonKey(name: 'date', fromJson: MilkingEntry._fromJson)
+  final DateTime dateTime;
   @JsonKey(defaultValue: "Manish Samaiya")
   @override
   final String milker;
 
   @override
   String toString() {
-    return 'MilkingEntry(dataBaseId: $dataBaseId, cattleType: $cattleType, cattleNumber: $cattleNumber, milkQuantity: $milkQuantity, milker: $milker)';
+    return 'MilkingEntry(dataBaseId: $dataBaseId, cattleType: $cattleType, cattleNumber: $cattleNumber, milkQuantity: $milkQuantity, dateTime: $dateTime, milker: $milker)';
   }
 
   @override
@@ -201,6 +216,9 @@ class _$_MilkingEntry implements _MilkingEntry {
             (identical(other.milkQuantity, milkQuantity) ||
                 const DeepCollectionEquality()
                     .equals(other.milkQuantity, milkQuantity)) &&
+            (identical(other.dateTime, dateTime) ||
+                const DeepCollectionEquality()
+                    .equals(other.dateTime, dateTime)) &&
             (identical(other.milker, milker) ||
                 const DeepCollectionEquality().equals(other.milker, milker)));
   }
@@ -212,6 +230,7 @@ class _$_MilkingEntry implements _MilkingEntry {
       const DeepCollectionEquality().hash(cattleType) ^
       const DeepCollectionEquality().hash(cattleNumber) ^
       const DeepCollectionEquality().hash(milkQuantity) ^
+      const DeepCollectionEquality().hash(dateTime) ^
       const DeepCollectionEquality().hash(milker);
 
   @JsonKey(ignore: true)
@@ -227,10 +246,13 @@ class _$_MilkingEntry implements _MilkingEntry {
 
 abstract class _MilkingEntry implements MilkingEntry {
   const factory _MilkingEntry(
-      [@JsonKey(name: '_id') Map<String, String> dataBaseId,
+      [@JsonKey(name: '_id')
+          Map<String, String> dataBaseId,
       String cattleType,
       int cattleNumber,
-      double milkQuantity,
+      int milkQuantity,
+      @JsonKey(name: 'date', fromJson: MilkingEntry._fromJson)
+          DateTime dateTime,
       String milker]) = _$_MilkingEntry;
 
   factory _MilkingEntry.fromJson(Map<String, dynamic> json) =
@@ -244,7 +266,10 @@ abstract class _MilkingEntry implements MilkingEntry {
   @override
   int get cattleNumber;
   @override
-  double get milkQuantity;
+  int get milkQuantity;
+  @override
+  @JsonKey(name: 'date', fromJson: MilkingEntry._fromJson)
+  DateTime get dateTime;
   @override
   String get milker;
   @override

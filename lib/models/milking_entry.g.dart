@@ -12,8 +12,9 @@ _$_MilkingEntry _$_$_MilkingEntryFromJson(Map<String, dynamic> json) {
       (k, e) => MapEntry(k, e as String),
     ),
     json['cattleType'] as String ?? 'Buffalo',
-    json['cattleNumber'] as int ?? 1,
-    (json['milkQuantity'] as num)?.toDouble() ?? 0.0,
+    json['cattleNumber'] as int,
+    json['milkQuantity'] as int,
+    MilkingEntry._fromJson(json['date'] as Map<String, dynamic>),
     json['milker'] as String ?? 'Manish Samaiya',
   );
 }
@@ -24,5 +25,6 @@ Map<String, dynamic> _$_$_MilkingEntryToJson(_$_MilkingEntry instance) =>
       'cattleType': instance.cattleType,
       'cattleNumber': instance.cattleNumber,
       'milkQuantity': instance.milkQuantity,
+      'date': instance.dateTime?.toIso8601String(),
       'milker': instance.milker,
     };

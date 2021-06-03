@@ -1,3 +1,4 @@
+import 'package:dairy_farm/application/notifier/milking_data.dart';
 import 'package:dairy_farm/components/aggreagatedDataTable.dart';
 import 'package:dairy_farm/components/my_scaffold.dart';
 import 'package:dairy_farm/enums/cattle_type.dart';
@@ -10,8 +11,10 @@ import '../provider.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String id = "home";
-  final List<String> columnHeaders = ["Cattle Type", "Quantity (L)"];
+  final List<String> columnHeaders = ["Cattle Type", "Quantity"];
   final String tableHeading = "Today's Report";
+
+  final milkingDataProvider = StateNotifierProvider((ref) => MilkingDataNotifier(ref.read));
 
   totalCounts(List<MilkingEntry> milkingEntries) {
     double cowTotalMilk = 0;
@@ -33,10 +36,16 @@ class HomeScreen extends StatelessWidget {
       totalMilk += entry.milkQuantity;
     }
     return {
-      CattleType.Cow.toShortString() + " (" + cow_count.toString() + ")": cowTotalMilk.toString(),
-      CattleType.Buffalo.toShortString() + " (" + buffalo_count.toString() + ")": buffaloTotalMilk.toString(),
-      kTotal: totalMilk.toString(),
+      CattleType.Cow.toShortString() + " (" + cow_count.toString() + ")":
+          cowTotalMilk > 1000 ? (cowTotalMilk / 1000.0).toString() + " L" : cowTotalMilk.toString() + " ml",
+      CattleType.Buffalo.toShortString() + " (" + buffalo_count.toString() + ")":
+          buffaloTotalMilk > 1000 ? (buffaloTotalMilk / 1000.0).toString() + " L" : buffaloTotalMilk.toString() + " ml",
+      kTotal: totalMilk > 1000 ? (totalMilk / 1000.0).toString() + " L" : totalMilk.toString() + " ml"
     };
+  }
+
+  Future<AsyncValue> getTodayEntries(context) async {
+    return await context(serverClient).populateFromServer();
   }
 
   @override
@@ -50,6 +59,6 @@ class HomeScreen extends StatelessWidget {
               rowData: totalCounts(milkingEntries), columnHeaders: columnHeaders, tableHeading: tableHeading),
           loading: () => Center(child: CircularProgressIndicator()),
           error: (e, s) => Text(e.toString()));
-    }), () => {context.read(milkingDataProvider).reload()});
+    }),()=>{context.read(milkingDataProvider).reload()});
   }
 }

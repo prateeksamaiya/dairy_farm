@@ -29,17 +29,20 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'milking_entry.freezed.dart';
+
 part 'milking_entry.g.dart';
 
 @freezed
 abstract class MilkingEntry with _$MilkingEntry {
   const factory MilkingEntry(
-    [@JsonKey(name:'_id') Map<String,String> dataBaseId,
-      @Default("Buffalo")String cattleType,
-    @Default(1) int cattleNumber,
-    @Default(0.0)double milkQuantity,
-    @Default("Manish Samaiya") String milker]
-  ) = _MilkingEntry;
+      [@JsonKey(name: '_id') Map<String, String> dataBaseId,
+      @Default("Buffalo") String cattleType,
+      int cattleNumber,
+      int milkQuantity,
+      @JsonKey(name: 'date',fromJson: MilkingEntry._fromJson) DateTime dateTime,
+      @Default("Manish Samaiya") String milker]) = _MilkingEntry;
+
+  static DateTime _fromJson(Map<String,dynamic> dateJson) => DateTime.fromMillisecondsSinceEpoch(dateJson.entries.first.value).toLocal();
 
   factory MilkingEntry.fromJson(Map<String, dynamic> json) => _$MilkingEntryFromJson(json);
 }

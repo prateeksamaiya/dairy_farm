@@ -15,7 +15,7 @@ class MyScaffold extends StatelessWidget {
       ),
       body: body,
       drawer: MainDrawer(),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: onPressed==null?null:FloatingActionButton(
         child: Icon(Icons.refresh),
         onPressed: onPressed,
       ),
