@@ -1,16 +1,17 @@
 import 'package:dairy_farm/components/my_drop_down.dart';
+import 'package:dairy_farm/enums/cattle_type.dart';
 import 'package:dairy_farm/models/milking_entry.dart';
 import 'package:flutter/material.dart';
-import 'package:dairy_farm/enums/cattle_type.dart';
 import 'package:flutter/services.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../provider.dart';
 
 class MilkingForm extends HookWidget {
   bool isUpdatingEntry;
-
+  var isCattleNumberEmptyProvider = StateProvider<bool>((ref) => false);
+  var isMilkQuantityEmptyProvider = StateProvider<bool>((ref) => false);
   MilkingForm([bool isUpdatingEntry]) {
     this.isUpdatingEntry = isUpdatingEntry ?? false;
   }
@@ -33,6 +34,8 @@ class MilkingForm extends HookWidget {
   Widget build(BuildContext context) {
     print("building MilkingScreen");
     MilkingEntry milkingEntry = useProvider(milkEntryProvider).state;
+    bool isCattleNumberEmpty = useProvider(isCattleNumberEmptyProvider).state;
+    bool isMilkQuantityEmpty = useProvider(isMilkQuantityEmptyProvider).state;
     if (isUpdatingEntry) {
       milkQuantityController..text = milkingEntry.milkQuantity.toString();
       cattleNumberController..text = milkingEntry.cattleNumber.toString();
@@ -43,8 +46,8 @@ class MilkingForm extends HookWidget {
     }
     bool isButtonPressed = useProvider(buttonPressed).state;
 
-    final milkQuantityValidator = FilteringTextInputFormatter(RegExp("^([1-9][0-9]{0,4})"),allow: true);
-    final cattleNumberValidator = FilteringTextInputFormatter(RegExp("^([0-9]{0,8})"),allow: true);
+    final milkQuantityValidator = FilteringTextInputFormatter(RegExp("^([1-9][0-9]{0,4})"), allow: true);
+    final cattleNumberValidator = FilteringTextInputFormatter(RegExp("^([0-9]{0,8})"), allow: true);
     return Container(
       padding: EdgeInsets.symmetric(vertical: 0, horizontal: 60),
       child: ProviderListener(
@@ -86,36 +89,53 @@ class MilkingForm extends HookWidget {
                   inputFormatters: [cattleNumberValidator],
                   controller: cattleNumberController,
                   onChanged: (cattleNumber) {
+                    if(cattleNumber.isNotEmpty)
+                      context.read(isCattleNumberEmptyProvider).state = false;
                     context.read(milkEntryProvider).state =
                         milkingEntry.copyWith(cattleNumber: int.parse(cattleNumber));
                   },
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(hintText: 'Enter Cattle Number'),
+                  decoration: InputDecoration(hintText: 'Enter Cattle Number',
+                    errorText: isCattleNumberEmpty ? "Cattle number cannot be empty":null
+                  ),
                 ),
                 TextField(
                   inputFormatters: [milkQuantityValidator],
+                  decoration: InputDecoration(
+                      hintText: 'Enter Milk Quantity Number',
+                      errorText: isMilkQuantityEmpty ? "Milk Quantity number cannot be empty":null
+                  ),
                   controller: milkQuantityController,
                   onChanged: (milkQuantity) {
+                    if(milkQuantity.isNotEmpty)
+                      context.read(isMilkQuantityEmptyProvider).state = false;
                     context.read(milkEntryProvider).state =
                         milkingEntry.copyWith(milkQuantity: int.parse(milkQuantity));
                   },
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(hintText: 'Enter Milk Quantity in (ml)'),
                 ),
                 ElevatedButton(
                     onPressed: isButtonPressed
                         ? null
                         : () {
-                            if (!isUpdatingEntry) {
+                            if (milkingEntry.cattleNumber == null) {
+                              context.read(isCattleNumberEmptyProvider).state = true;
+                            }else if (milkingEntry.milkQuantity == null) {
+                              context.read(isMilkQuantityEmptyProvider).state = true;
+                            } else if (!isUpdatingEntry) {
                               context.read(milkingDataProvider).add(milkingEntry);
+                              context.read(milkEntryProvider).state = MilkingEntry();
                             } else {
                               Navigator.pop(context);
                               context.read(milkingDataProvider).update(milkingEntry);
+                              context.read(milkEntryProvider).state = MilkingEntry();
                             }
                           },
                     child: isButtonPressed
                         ? CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Colors.white))
-                        : isUpdatingEntry?Text("Update"):Text("Submit"))
+                        : isUpdatingEntry
+                            ? Text("Update")
+                            : Text("Submit"))
               ],
             ),
           ),
