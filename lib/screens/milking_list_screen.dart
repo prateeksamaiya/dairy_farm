@@ -80,33 +80,7 @@ class MilkingListScreen extends HookWidget {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: 100,
-                    height: 50,
-                    child: MyDropDownButton(
-                        value: filterCattle,
-                        items: cattleOptions.map((e) => e).toList(),
-                        itemIcon: Icon(Icons.ac_unit),
-                        onChanged: (cattleType) => {
-                              context.read(filteredCattleType).state =
-                                  cattleOptions.firstWhere((element) => element == cattleType)
-                            }),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: 150,
-                    height: 50,
-                    child: MyDropDownButton(
-                        value: sortBy,
-                        items: sortOptions.map((e) => e).toList(),
-                        itemIcon: Icon(Icons.ac_unit),
-                        onChanged: (sortOption) => {context.read(sortedBy).state = sortOption}),
-                  ),
-                ),
+
                 MyTextFieldDatePicker(
                   width: 200.0,
                   labelText: "from",
@@ -134,6 +108,33 @@ class MilkingListScreen extends HookWidget {
                     to = ApplicationUtil.midnight(selectedDate).add(Duration(days: 1));
                     context.read(milkingDataProvider).reload(from, to);
                   },
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    width: 100,
+                    height: 50,
+                    child: MyDropDownButton(
+                        value: filterCattle,
+                        items: cattleOptions.map((e) => e).toList(),
+                        itemIcon: Icon(Icons.ac_unit),
+                        onChanged: (cattleType) => {
+                          context.read(filteredCattleType).state =
+                              cattleOptions.firstWhere((element) => element == cattleType)
+                        }),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    width: 150,
+                    height: 50,
+                    child: MyDropDownButton(
+                        value: sortBy,
+                        items: sortOptions.map((e) => e).toList(),
+                        itemIcon: Icon(Icons.ac_unit),
+                        onChanged: (sortOption) => {context.read(sortedBy).state = sortOption}),
+                  ),
                 )
               ]),
             ),

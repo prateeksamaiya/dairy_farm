@@ -2,6 +2,7 @@ import 'package:dairy_farm/components/my_drop_down.dart';
 import 'package:dairy_farm/models/milking_entry.dart';
 import 'package:flutter/material.dart';
 import 'package:dairy_farm/enums/cattle_type.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -41,6 +42,9 @@ class MilkingForm extends HookWidget {
           TextSelection.fromPosition(TextPosition(offset: milkingEntry.cattleNumber.toString().length));
     }
     bool isButtonPressed = useProvider(buttonPressed).state;
+
+    final milkQuantityValidator = FilteringTextInputFormatter(RegExp("^([1-9][0-9]{0,4})"),allow: true);
+    final cattleNumberValidator = FilteringTextInputFormatter(RegExp("^([0-9]{0,8})"),allow: true);
     return Container(
       padding: EdgeInsets.symmetric(vertical: 0, horizontal: 60),
       child: ProviderListener(
@@ -79,6 +83,7 @@ class MilkingForm extends HookWidget {
                     onChanged: (cattleType) =>
                         {context.read(milkEntryProvider).state = milkingEntry.copyWith(cattleType: cattleType)}),
                 TextField(
+                  inputFormatters: [cattleNumberValidator],
                   controller: cattleNumberController,
                   onChanged: (cattleNumber) {
                     context.read(milkEntryProvider).state =
@@ -88,6 +93,7 @@ class MilkingForm extends HookWidget {
                   decoration: InputDecoration(hintText: 'Enter Cattle Number'),
                 ),
                 TextField(
+                  inputFormatters: [milkQuantityValidator],
                   controller: milkQuantityController,
                   onChanged: (milkQuantity) {
                     context.read(milkEntryProvider).state =
