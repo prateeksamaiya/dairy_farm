@@ -224,7 +224,7 @@ class MilkingListScreen extends HookWidget {
                             isScrollControlled: true,
                             builder: (context) => SingleChildScrollView(
                                     child: Container(
-                                  padding: EdgeInsets.only(top: MediaQuery.of(context).viewInsets.top + 20),
+                                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom + 40),
                                   child: MilkingForm(true),
                                 )));
                       },
