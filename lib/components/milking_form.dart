@@ -38,12 +38,12 @@ class MilkingForm extends HookWidget {
     bool isCattleNumberEmpty = useProvider(isCattleNumberEmptyProvider).state;
     bool isMilkQuantityEmpty = useProvider(isMilkQuantityEmptyProvider).state;
     if (isUpdatingEntry) {
-      milkQuantityController..text = milkingEntry.milkQuantity.toString();
-      cattleNumberController..text = milkingEntry.cattleNumber.toString();
+      milkQuantityController..text = milkingEntry.milkQuantity == null?"": milkingEntry.milkQuantity.toString();
+      cattleNumberController..text = milkingEntry.cattleNumber == null?"":milkingEntry.cattleNumber.toString();
       milkQuantityController.selection =
-          TextSelection.fromPosition(TextPosition(offset: milkingEntry.milkQuantity.toString().length));
+          TextSelection.fromPosition(TextPosition(offset: milkingEntry.milkQuantity==null?0: milkingEntry.milkQuantity.toString().length));
       cattleNumberController.selection =
-          TextSelection.fromPosition(TextPosition(offset: milkingEntry.cattleNumber.toString().length));
+          TextSelection.fromPosition(TextPosition(offset: milkingEntry.cattleNumber==null?0: milkingEntry.cattleNumber.toString().length));
     }
     bool isButtonPressed = useProvider(buttonPressed).state;
 
@@ -90,13 +90,9 @@ class MilkingForm extends HookWidget {
                   inputFormatters: [cattleNumberValidator],
                   controller: cattleNumberController,
                   onChanged: (cattleNumber) {
-                    if (cattleNumber.isNotEmpty) {
-                      context.read(isCattleNumberEmptyProvider).state = false;
-                      context.read(milkEntryProvider).state =
-                          milkingEntry.copyWith(cattleNumber: int.parse(cattleNumber));
-                    } else {
-                      context.read(milkEntryProvider).state = milkingEntry.copyWith(cattleNumber: null);
-                    }
+                    if (cattleNumber.isNotEmpty) context.read(isCattleNumberEmptyProvider).state = false;
+                    context.read(milkEntryProvider).state =
+                        milkingEntry.copyWith(cattleNumber: cattleNumber == "" ? null : int.parse(cattleNumber));
                   },
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
@@ -110,13 +106,9 @@ class MilkingForm extends HookWidget {
                       errorText: isMilkQuantityEmpty ? "Milk Quantity number cannot be empty" : null),
                   controller: milkQuantityController,
                   onChanged: (milkQuantity) {
-                    if (milkQuantity.isNotEmpty) {
-                      context.read(isMilkQuantityEmptyProvider).state = false;
-                      context.read(milkEntryProvider).state =
-                          milkingEntry.copyWith(milkQuantity: int.parse(milkQuantity));
-                    } else {
-                      context.read(milkEntryProvider).state = milkingEntry.copyWith(milkQuantity: null);
-                    }
+                    if (milkQuantity.isNotEmpty) context.read(isMilkQuantityEmptyProvider).state = false;
+                    context.read(milkEntryProvider).state =
+                        milkingEntry.copyWith(milkQuantity: milkQuantity == "" ? null : int.parse(milkQuantity));
                   },
                   keyboardType: TextInputType.number,
                 ),
@@ -126,9 +118,14 @@ class MilkingForm extends HookWidget {
                         : () {
                             if (milkingEntry.cattleNumber == null) {
                               context.read(isCattleNumberEmptyProvider).state = true;
-                            } else if (milkingEntry.milkQuantity == null) {
+                              return;
+                            }
+                            if (milkingEntry.milkQuantity == null) {
                               context.read(isMilkQuantityEmptyProvider).state = true;
-                            } else if (!isUpdatingEntry) {
+                              return;
+                            }
+
+                            if (!isUpdatingEntry) {
                               context.read(milkingDataProvider).add(milkingEntry);
                               context.read(milkEntryProvider).state = MilkingEntry();
                             } else {

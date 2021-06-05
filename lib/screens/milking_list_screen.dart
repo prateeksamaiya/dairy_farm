@@ -165,7 +165,7 @@ class MilkingListScreen extends HookWidget {
                   itemBuilder: (BuildContext context, int index) {
                     MilkingEntry milkingEntry = entries.elementAt(index);
                     return ListTile(
-                      leading: CircleAvatar(radius: 35, child: Text(milkingEntry.cattleNumber.toString())),
+                      leading: CircleAvatar(radius: 40, child: Text(milkingEntry.cattleNumber.toString())),
                       title: Row(
                         children: [
                           RichText(
