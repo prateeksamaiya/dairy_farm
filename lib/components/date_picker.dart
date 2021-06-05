@@ -70,23 +70,19 @@ class _MyTextFieldDatePicker extends State<MyTextFieldDatePicker> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: SizedBox(
-        width: widget.width ?? 200,
-        height: widget.height ?? 35,
-        child: TextField(
-          focusNode: widget.focusNode,
-          controller: _controllerDate,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            prefixIcon: widget.prefixIcon,
-            suffixIcon: widget.suffixIcon,
-            labelText: widget.labelText,
-          ),
-          onTap: () => _selectDate(context),
-          readOnly: true,
+    return SizedBox(
+      width: widget.width ?? 200,
+      child: TextField(
+        focusNode: widget.focusNode,
+        controller: _controllerDate,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(),
+          prefixIcon: widget.prefixIcon,
+          suffixIcon: widget.suffixIcon,
+          labelText: widget.labelText,
         ),
+        onTap: () => _selectDate(context),
+        readOnly: true,
       ),
     );
   }

@@ -1,7 +1,5 @@
-import 'package:dairy_farm/application/notifier/milking_data.dart';
 import 'package:dairy_farm/components/date_picker.dart';
 import 'package:dairy_farm/components/milking_form.dart';
-import 'package:dairy_farm/components/my_drop_down.dart';
 import 'package:dairy_farm/components/my_scaffold.dart';
 import 'package:dairy_farm/enums/cattle_type.dart';
 import 'package:dairy_farm/models/milking_entry.dart';
@@ -80,63 +78,86 @@ class MilkingListScreen extends HookWidget {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(children: [
-
-                MyTextFieldDatePicker(
-                  width: 200.0,
-                  labelText: "from",
-                  dateFormat: DateFormat.yMd(),
-                  prefixIcon: Icon(Icons.date_range),
-                  suffixIcon: Icon(Icons.arrow_drop_down),
-                  lastDate: DateTime.now().add(Duration(days: 366)),
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime.now().subtract(Duration(days: 365)),
-                  onDateChanged: (selectedDate) {
-                    from = selectedDate;
-                    context.read(milkingDataProvider).reload(from, to);
-                  },
-                ),
-                MyTextFieldDatePicker(
-                  width: 200.0,
-                  labelText: "to",
-                  dateFormat: DateFormat.yMd(),
-                  prefixIcon: Icon(Icons.date_range),
-                  suffixIcon: Icon(Icons.arrow_drop_down),
-                  lastDate: DateTime.now().add(Duration(days: 366)),
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime.now().subtract(Duration(days: 365)),
-                  onDateChanged: (selectedDate) {
-                    to = ApplicationUtil.midnight(selectedDate).add(Duration(days: 1));
-                    context.read(milkingDataProvider).reload(from, to);
-                  },
-                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: 100,
-                    height: 50,
-                    child: MyDropDownButton(
-                        value: filterCattle,
-                        items: cattleOptions.map((e) => e).toList(),
-                        itemIcon: Icon(Icons.ac_unit),
-                        onChanged: (cattleType) => {
-                          context.read(filteredCattleType).state =
-                              cattleOptions.firstWhere((element) => element == cattleType)
-                        }),
+                  child: MyTextFieldDatePicker(
+                    width: 200.0,
+                    labelText: "from",
+                    dateFormat: DateFormat.yMd(),
+                    prefixIcon: Icon(Icons.date_range),
+                    suffixIcon: Icon(Icons.arrow_drop_down),
+                    lastDate: DateTime.now().add(Duration(days: 366)),
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime.now().subtract(Duration(days: 365)),
+                    onDateChanged: (selectedDate) {
+                      from = selectedDate;
+                      context.read(milkingDataProvider).reload(from, to);
+                    },
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: 150,
-                    height: 50,
-                    child: MyDropDownButton(
-                        value: sortBy,
-                        items: sortOptions.map((e) => e).toList(),
-                        itemIcon: Icon(Icons.ac_unit),
-                        onChanged: (sortOption) => {context.read(sortedBy).state = sortOption}),
+                  child: MyTextFieldDatePicker(
+                    width: 200.0,
+                    labelText: "to",
+                    dateFormat: DateFormat.yMd(),
+                    prefixIcon: Icon(Icons.date_range),
+                    suffixIcon: Icon(Icons.arrow_drop_down),
+                    lastDate: DateTime.now().add(Duration(days: 366)),
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime.now().subtract(Duration(days: 365)),
+                    onDateChanged: (selectedDate) {
+                      to = ApplicationUtil.midnight(selectedDate).add(Duration(days: 1));
+                      context.read(milkingDataProvider).reload(from, to);
+                    },
+                  ),
+                ),
+                SizedBox(
+                  width: 150,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: DropdownButtonFormField<String>(
+                      value: filterCattle,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(), labelText: "Filter by"),
+                      onChanged: (cattleType) => {
+                        context.read(filteredCattleType).state =
+                            cattleOptions.firstWhere((element) => element == cattleType)
+                      },
+                      items: cattleOptions.map((e) => e).toList().map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 180,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: DropdownButtonFormField<String>(
+                      isExpanded: true,
+                      value: sortBy,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(), labelText: "Sort by"),
+                      onChanged: (sortOption) => {context.read(sortedBy).state = sortOption},
+                      items: sortOptions.map((e) => e).toList().map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(
+                            value,
+                          ),
+                        );
+                      }).toList(),
+                    ),
                   ),
                 )
               ]),
+            ),
+            SizedBox(
+              height: 10,
             ),
             Expanded(
               child: ListView.builder(

@@ -12,6 +12,7 @@ class MilkingForm extends HookWidget {
   bool isUpdatingEntry;
   var isCattleNumberEmptyProvider = StateProvider<bool>((ref) => false);
   var isMilkQuantityEmptyProvider = StateProvider<bool>((ref) => false);
+
   MilkingForm([bool isUpdatingEntry]) {
     this.isUpdatingEntry = isUpdatingEntry ?? false;
   }
@@ -89,28 +90,33 @@ class MilkingForm extends HookWidget {
                   inputFormatters: [cattleNumberValidator],
                   controller: cattleNumberController,
                   onChanged: (cattleNumber) {
-                    if(cattleNumber.isNotEmpty)
+                    if (cattleNumber.isNotEmpty) {
                       context.read(isCattleNumberEmptyProvider).state = false;
-                    context.read(milkEntryProvider).state =
-                        milkingEntry.copyWith(cattleNumber: int.parse(cattleNumber));
+                      context.read(milkEntryProvider).state =
+                          milkingEntry.copyWith(cattleNumber: int.parse(cattleNumber));
+                    } else {
+                      context.read(milkEntryProvider).state = milkingEntry.copyWith(cattleNumber: null);
+                    }
                   },
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(hintText: 'Enter Cattle Number',
-                    errorText: isCattleNumberEmpty ? "Cattle number cannot be empty":null
-                  ),
+                  decoration: InputDecoration(
+                      hintText: 'Enter Cattle Number',
+                      errorText: isCattleNumberEmpty ? "Cattle number cannot be empty" : null),
                 ),
                 TextField(
                   inputFormatters: [milkQuantityValidator],
                   decoration: InputDecoration(
                       hintText: 'Enter Milk Quantity Number',
-                      errorText: isMilkQuantityEmpty ? "Milk Quantity number cannot be empty":null
-                  ),
+                      errorText: isMilkQuantityEmpty ? "Milk Quantity number cannot be empty" : null),
                   controller: milkQuantityController,
                   onChanged: (milkQuantity) {
-                    if(milkQuantity.isNotEmpty)
+                    if (milkQuantity.isNotEmpty) {
                       context.read(isMilkQuantityEmptyProvider).state = false;
-                    context.read(milkEntryProvider).state =
-                        milkingEntry.copyWith(milkQuantity: int.parse(milkQuantity));
+                      context.read(milkEntryProvider).state =
+                          milkingEntry.copyWith(milkQuantity: int.parse(milkQuantity));
+                    } else {
+                      context.read(milkEntryProvider).state = milkingEntry.copyWith(milkQuantity: null);
+                    }
                   },
                   keyboardType: TextInputType.number,
                 ),
@@ -120,7 +126,7 @@ class MilkingForm extends HookWidget {
                         : () {
                             if (milkingEntry.cattleNumber == null) {
                               context.read(isCattleNumberEmptyProvider).state = true;
-                            }else if (milkingEntry.milkQuantity == null) {
+                            } else if (milkingEntry.milkQuantity == null) {
                               context.read(isMilkQuantityEmptyProvider).state = true;
                             } else if (!isUpdatingEntry) {
                               context.read(milkingDataProvider).add(milkingEntry);
