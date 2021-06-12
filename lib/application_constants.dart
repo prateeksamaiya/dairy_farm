@@ -7,3 +7,11 @@ const String kmilkQuantity = "milkQuantity";
 const String kBackEndUrl = "165.22.209.61:5000";
 const String kTotal = "Total";
 const List<String> kCattleTypeNames = ['Buffalo', 'Cow'];
+
+
+
+
+
+
+
+

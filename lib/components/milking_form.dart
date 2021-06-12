@@ -1,12 +1,15 @@
 import 'package:dairy_farm/components/my_drop_down.dart';
 import 'package:dairy_farm/enums/cattle_type.dart';
 import 'package:dairy_farm/models/milking_entry.dart';
+import 'package:dairy_farm/util/applicaition_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../app_localizations.dart';
 import '../provider.dart';
+import '../translation_constants.dart';
 
 class MilkingForm extends HookWidget {
   bool isUpdatingEntry;
@@ -96,14 +99,14 @@ class MilkingForm extends HookWidget {
                   },
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                      hintText: 'Enter Cattle Number',
-                      errorText: isCattleNumberEmpty ? "Cattle number cannot be empty" : null),
+                      hintText: ApplicationUtil.translate(enterCattleNumber),
+                      errorText: isCattleNumberEmpty ? ApplicationUtil.translate(cattleNumberEmptyMessage) : null),
                 ),
                 TextField(
                   inputFormatters: [milkQuantityValidator],
                   decoration: InputDecoration(
-                      hintText: 'Enter Milk Quantity Number',
-                      errorText: isMilkQuantityEmpty ? "Milk Quantity number cannot be empty" : null),
+                      hintText: ApplicationUtil.translate(enterMilkQuantityNumber),
+                      errorText: isMilkQuantityEmpty ? ApplicationUtil.translate(milkQuantityEmptyMessage) : null),
                   controller: milkQuantityController,
                   onChanged: (milkQuantity) {
                     if (milkQuantity.isNotEmpty) context.read(isMilkQuantityEmptyProvider).state = false;
@@ -138,7 +141,7 @@ class MilkingForm extends HookWidget {
                         ? CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Colors.white))
                         : isUpdatingEntry
                             ? Text("Update")
-                            : Text("Submit"))
+                            : Text(AppLocalizations.of(context).translate("submit")))
               ],
             ),
           ),

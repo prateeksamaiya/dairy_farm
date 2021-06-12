@@ -1,3 +1,4 @@
+import 'package:dairy_farm/util/applicaition_util.dart';
 import 'package:flutter/material.dart';
 
 class MyDropDownButton extends StatelessWidget {
@@ -20,7 +21,7 @@ class MyDropDownButton extends StatelessWidget {
       items: items.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
-          child: Text(value),
+          child: Text(ApplicationUtil.translate(value)),
         );
       }).toList(),
     );

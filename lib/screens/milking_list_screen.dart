@@ -8,14 +8,14 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:dairy_farm/translation_constants.dart';
 import 'package:intl/intl.dart';
 
 import '../provider.dart';
 
 class MilkingListScreen extends HookWidget {
   static const String id = "milking_data_screen";
-  final List<String> columnHeaders = ["milker", "cattleType", "cattleNumber", "milkQuantity"];
-  final String tableHeading = "Today's Report";
+
   DateTime from = ApplicationUtil.midnight();
   DateTime to = ApplicationUtil.midnight().add(Duration(days: 1));
 
@@ -82,7 +82,7 @@ class MilkingListScreen extends HookWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: MyTextFieldDatePicker(
                     width: 200.0,
-                    labelText: "from",
+                    labelText: ApplicationUtil.translate("from"),
                     dateFormat: DateFormat.yMd(),
                     prefixIcon: Icon(Icons.date_range),
                     suffixIcon: Icon(Icons.arrow_drop_down),
@@ -99,7 +99,7 @@ class MilkingListScreen extends HookWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: MyTextFieldDatePicker(
                     width: 200.0,
-                    labelText: "to",
+                    labelText: ApplicationUtil.translate("to"),
                     dateFormat: DateFormat.yMd(),
                     prefixIcon: Icon(Icons.date_range),
                     suffixIcon: Icon(Icons.arrow_drop_down),
@@ -119,7 +119,7 @@ class MilkingListScreen extends HookWidget {
                     child: DropdownButtonFormField<String>(
                       value: filterCattle,
                       decoration: InputDecoration(
-                          border: OutlineInputBorder(), labelText: "Filter by"),
+                          border: OutlineInputBorder(), labelText: ApplicationUtil.translate(filterBy)),
                       onChanged: (cattleType) => {
                         context.read(filteredCattleType).state =
                             cattleOptions.firstWhere((element) => element == cattleType)
@@ -127,7 +127,7 @@ class MilkingListScreen extends HookWidget {
                       items: cattleOptions.map((e) => e).toList().map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value),
+                          child: Text(ApplicationUtil.translate(value.toUpperCase())),
                         );
                       }).toList(),
                     ),
@@ -141,13 +141,13 @@ class MilkingListScreen extends HookWidget {
                       isExpanded: true,
                       value: sortBy,
                       decoration: InputDecoration(
-                          border: OutlineInputBorder(), labelText: "Sort by"),
+                          border: OutlineInputBorder(), labelText: ApplicationUtil.translate(sortingBy)),
                       onChanged: (sortOption) => {context.read(sortedBy).state = sortOption},
                       items: sortOptions.map((e) => e).toList().map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(
-                            value,
+                            ApplicationUtil.translate(value),
                           ),
                         );
                       }).toList(),
@@ -170,7 +170,7 @@ class MilkingListScreen extends HookWidget {
                         children: [
                           RichText(
                             text: TextSpan(
-                                text: milkingEntry.cattleType,
+                                text: ApplicationUtil.translate(milkingEntry.cattleType),
                                 style: TextStyle(color: Colors.blue),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
@@ -186,7 +186,7 @@ class MilkingListScreen extends HookWidget {
                           )
                         ],
                       ),
-                      subtitle: Text(milkingEntry.milker),
+                      subtitle: Text(ApplicationUtil.translate(milkingEntry.milker)),
                       trailing: Text(
                           milkingEntry.milkQuantity > 1000
                               ? (milkingEntry.milkQuantity / 1000.0).toString() + " L"

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dairy_farm/util/applicaition_util.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dairy_farm/models/milking_entry.dart';
@@ -35,7 +36,7 @@ class MilkingDataNotifier extends StateNotifier<AsyncValue<List<MilkingEntry>>> 
     try {
       var response = await serverClientReader(serverClient).submitMilkingEntry(entry);
       if (response.statusCode == 200) {
-        serverClientReader(clientStatus).state = AsyncData("Milking entry successfully created");
+        serverClientReader(clientStatus).state = AsyncData(ApplicationUtil.translate("Milking entry successfully created"));
         var inserted_entry = MilkingEntry.fromJson(json.decode(response.body));
         state = state.whenData((entries) => entries..add(inserted_entry));
       } else
@@ -50,7 +51,7 @@ class MilkingDataNotifier extends StateNotifier<AsyncValue<List<MilkingEntry>>> 
     try {
       var response = await serverClientReader(serverClient).updateMilkingEntry(updatedEntry);
       if (response.statusCode == 200) {
-        serverClientReader(clientStatus).state = AsyncData("Milking entry successfully updated");
+        serverClientReader(clientStatus).state = AsyncData(ApplicationUtil.translate("Milking entry successfully updated"));
         state = state.whenData((entries) {
           return [
             for (final entry in entries)

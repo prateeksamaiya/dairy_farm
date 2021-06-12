@@ -1,4 +1,6 @@
+import 'package:dairy_farm/util/applicaition_util.dart';
 import 'package:flutter/material.dart';
+import '../translation_constants.dart';
 import 'main_drawer.dart';
 
 class MyScaffold extends StatelessWidget {
@@ -11,7 +13,7 @@ class MyScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("DairyFarm"),
+        title: Text(ApplicationUtil.translate(title)),
       ),
       body: body,
       drawer: MainDrawer(),

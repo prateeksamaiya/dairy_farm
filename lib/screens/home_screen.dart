@@ -3,16 +3,19 @@ import 'package:dairy_farm/components/aggreagatedDataTable.dart';
 import 'package:dairy_farm/components/my_scaffold.dart';
 import 'package:dairy_farm/enums/cattle_type.dart';
 import 'package:dairy_farm/models/milking_entry.dart';
+import 'package:dairy_farm/util/applicaition_util.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../app_localizations.dart';
 import '../application_constants.dart';
 import '../provider.dart';
+import '../translation_constants.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String id = "home";
-  final List<String> columnHeaders = ["Cattle Type", "Quantity"];
-  final String tableHeading = "Today's Report";
+  final List<String> columnHeaders = [ApplicationUtil.translate(cattleType), ApplicationUtil.translate(quantity)];
+  final String tableHeading = ApplicationUtil.translate(todayReport);
 
   final milkingDataProvider = StateNotifierProvider((ref) => MilkingDataNotifier(ref.read));
 
@@ -36,11 +39,11 @@ class HomeScreen extends StatelessWidget {
       totalMilk += entry.milkQuantity;
     }
     return {
-      CattleType.Cow.toShortString() + " (" + cow_count.toString() + ")":
+      ApplicationUtil.translate(CattleType.Cow.toShortString()) + " (" + cow_count.toString() + ")":
           cowTotalMilk > 1000 ? (cowTotalMilk / 1000.0).toString() + " L" : cowTotalMilk.toString() + " ml",
-      CattleType.Buffalo.toShortString() + " (" + buffalo_count.toString() + ")":
+      ApplicationUtil.translate(CattleType.Buffalo.toShortString()) + " (" + buffalo_count.toString() + ")":
           buffaloTotalMilk > 1000 ? (buffaloTotalMilk / 1000.0).toString() + " L" : buffaloTotalMilk.toString() + " ml",
-      kTotal: totalMilk > 1000 ? (totalMilk / 1000.0).toString() + " L" : totalMilk.toString() + " ml"
+      ApplicationUtil.translate(kTotal): totalMilk > 1000 ? (totalMilk / 1000.0).toString() + " L" : totalMilk.toString() + " ml"
     };
   }
 
