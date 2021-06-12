@@ -40,9 +40,9 @@ class MilkingDataNotifier extends StateNotifier<AsyncValue<List<MilkingEntry>>> 
         var inserted_entry = MilkingEntry.fromJson(json.decode(response.body));
         state = state.whenData((entries) => entries..add(inserted_entry));
       } else
-        serverClientReader(clientStatus).state = AsyncError("Error while created milking entry");
+        serverClientReader(clientStatus).state = AsyncError("Error while creating milking entry");
     } catch (e) {
-      serverClientReader(clientStatus).state = AsyncError("Exception occured while created milking entry");
+      serverClientReader(clientStatus).state = AsyncError("Exception occured while creating milking entry");
     }
   }
 

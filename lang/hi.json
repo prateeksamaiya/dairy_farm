@@ -28,6 +28,11 @@
   "cattle_number": "मवेशी संख्या",
   "all": "सब",
   "milking_entry_successfully_created": "एंट्री सफलता पूर्वक दर्ज़ कर ली गयी है ।",
-  "milking_entry_successfully_updated": "एंट्री में सुधर दर्ज़ हो गया है ।"
-
+  "milking_entry_successfully_updated": "एंट्री में सुधर दर्ज़ हो गया है ।",
+  "error_while_creating_milking_entry": "एंट्री दर्ज़ करने में परेशानी हो रही है ।",
+  "exception_occured_while_creating_milking_entry": "एंट्री दर्ज़ करने में परेशानी हो रही है ।",
+  "error_while_updating_milking_entry": "एंट्री सुधारने में परेशानी हो रही है ।",
+  "exception_occured_while_updating_milking_entry": "एंट्री सुधारने में परेशानी हो रही है ।",
+  "error_while_deleting_milking_entry": "एंट्री मिटने में परेशानी हो रही है ।",
+  "exception occured while deleting milking entry": "एंट्री मिटने में परेशानी हो रही है ।"
 }
