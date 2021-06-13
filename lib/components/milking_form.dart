@@ -163,8 +163,8 @@ class MilkingForm extends HookWidget {
                     child: isButtonPressed
                         ? CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Colors.white))
                         : isUpdatingEntry
-                        ? Text("Update")
-                        : Text(AppLocalizations.of(context).translate("submit")))
+                        ? Text(ApplicationUtil.translate("Update"))
+                        : Text(ApplicationUtil.translate("submit")))
               ],
             ),
           ),
