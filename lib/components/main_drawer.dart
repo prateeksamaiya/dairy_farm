@@ -7,6 +7,9 @@ import 'package:dairy_farm/provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+import '../app_localizations.dart';
+import '../translation_constants.dart';
+
 
 class MainDrawer extends HookWidget {
 
@@ -23,7 +26,7 @@ class MainDrawer extends HookWidget {
           ListTile(
             selected: state == 0,
             leading: Icon(Icons.home,size: 30,),
-            title: Text("Home"),
+            title: Text(AppLocalizations.of(context).translate(home)),
             onTap: (){
               context.read(navigation_select).state = 0;
               Navigator.pushReplacementNamed(context, HomeScreen.id);
@@ -37,7 +40,7 @@ class MainDrawer extends HookWidget {
               height: 30.0,
               color: null,
             ),
-            title: Text("Milking"),
+            title: Text( AppLocalizations.of(context).translate(milking)),
             onTap: (){
               context.read(navigation_select).state = 1;
               context.read(milkEntryProvider).state = MilkingEntry();
@@ -52,7 +55,7 @@ class MainDrawer extends HookWidget {
               height: 30.0,
               color: null,
             ),
-            title: Text("MilkingListScreen"),
+            title: Text(AppLocalizations.of(context).translate(milkingDetails)),
             onTap: (){
               context.read(navigation_select).state = 2;
               Navigator.pushReplacementNamed(context, MilkingListScreen.id);
