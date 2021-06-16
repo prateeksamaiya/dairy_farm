@@ -15,7 +15,7 @@ class MilkingDataNotifier extends StateNotifier<AsyncValue<List<MilkingEntry>>> 
 
   _loadMilkingEntry([DateTime from, DateTime to]) async {
     try {
-      List<MilkingEntry> entries = await serverClientReader(serverClient).populateFromServer(from, to);
+      List<MilkingEntry> entries = await serverClientReader(milkingClient).populateFromServer(from, to);
       state = AsyncData(entries);
     } catch (e, s) {
       state = AsyncError(e, s);
@@ -31,7 +31,7 @@ class MilkingDataNotifier extends StateNotifier<AsyncValue<List<MilkingEntry>>> 
   Future<bool> add(MilkingEntry entry) async {
     serverClientReader(clientStatus).state = AsyncLoading();
     try {
-      var response = await serverClientReader(serverClient).submitMilkingEntry(entry);
+      var response = await serverClientReader(milkingClient).submitMilkingEntry(entry);
       if (response.statusCode == 200) {
         serverClientReader(clientStatus).state =
             AsyncData(ApplicationUtil.translate("Milking entry successfully created"));
@@ -49,7 +49,7 @@ class MilkingDataNotifier extends StateNotifier<AsyncValue<List<MilkingEntry>>> 
   Future<bool> update(MilkingEntry updatedEntry) async {
     serverClientReader(clientStatus).state = AsyncLoading();
     try {
-      var response = await serverClientReader(serverClient).updateMilkingEntry(updatedEntry);
+      var response = await serverClientReader(milkingClient).updateMilkingEntry(updatedEntry);
       if (response.statusCode == 200) {
         serverClientReader(clientStatus).state =
             AsyncData(ApplicationUtil.translate(ApplicationUtil.translate("Milking entry successfully updated")));
@@ -71,7 +71,7 @@ class MilkingDataNotifier extends StateNotifier<AsyncValue<List<MilkingEntry>>> 
   Future<bool> delete(MilkingEntry entry, index) async {
     serverClientReader(clientStatus).state = AsyncLoading();
     try {
-      var response = await serverClientReader(serverClient).deleteEntry(entry);
+      var response = await serverClientReader(milkingClient).deleteEntry(entry);
       if (response.statusCode == 200) {
         serverClientReader(clientStatus).state = AsyncData(ApplicationUtil.translate("Milking Entry successfully deleted"));
         state = state.whenData((entries) => entries..removeAt(index));

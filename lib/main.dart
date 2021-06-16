@@ -1,3 +1,4 @@
+import 'package:dairy_farm/screens/cattleScreen.dart';
 import 'package:dairy_farm/screens/home_screen.dart';
 import 'package:dairy_farm/screens/milking_list_screen.dart';
 import 'package:dairy_farm/screens/milking_screen.dart';
@@ -21,6 +22,7 @@ class DairyApp extends StatelessWidget {
           HomeScreen.id: (context) => HomeScreen(),
           MilkingScreen.id: (context) => MilkingScreen(),
           MilkingListScreen.id: (context) => MilkingListScreen(),
+          CattleScreen.id: (context) => CattleScreen()
         },
         supportedLocales: [
           Locale('en', 'US'),

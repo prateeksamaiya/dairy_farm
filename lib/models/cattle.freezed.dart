@@ -8,16 +8,16 @@ part of 'cattle.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
-Cattle _$CattleFromJson(Map<String, dynamic> json) {
-  return _Cattle.fromJson(json);
+CattleEntry _$CattleEntryFromJson(Map<String, dynamic> json) {
+  return _CattleEntry.fromJson(json);
 }
 
 /// @nodoc
-class _$CattleTearOff {
-  const _$CattleTearOff();
+class _$CattleEntryTearOff {
+  const _$CattleEntryTearOff();
 
 // ignore: unused_element
-  _Cattle call(
+  _CattleEntry call(
       [@JsonKey(name: '_id') Map<String, String> dataBaseId,
       String tagNumber,
       CattleType type,
@@ -32,7 +32,7 @@ class _$CattleTearOff {
       DateTime broughtInDate,
       bool isSold = false,
       bool isDead = false]) {
-    return _Cattle(
+    return _CattleEntry(
       dataBaseId,
       tagNumber,
       type,
@@ -51,17 +51,17 @@ class _$CattleTearOff {
   }
 
 // ignore: unused_element
-  Cattle fromJson(Map<String, Object> json) {
-    return Cattle.fromJson(json);
+  CattleEntry fromJson(Map<String, Object> json) {
+    return CattleEntry.fromJson(json);
   }
 }
 
 /// @nodoc
 // ignore: unused_element
-const $Cattle = _$CattleTearOff();
+const $CattleEntry = _$CattleEntryTearOff();
 
 /// @nodoc
-mixin _$Cattle {
+mixin _$CattleEntry {
   @JsonKey(name: '_id')
   Map<String, String> get dataBaseId;
   String get tagNumber;
@@ -80,13 +80,14 @@ mixin _$Cattle {
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
-  $CattleCopyWith<Cattle> get copyWith;
+  $CattleEntryCopyWith<CattleEntry> get copyWith;
 }
 
 /// @nodoc
-abstract class $CattleCopyWith<$Res> {
-  factory $CattleCopyWith(Cattle value, $Res Function(Cattle) then) =
-      _$CattleCopyWithImpl<$Res>;
+abstract class $CattleEntryCopyWith<$Res> {
+  factory $CattleEntryCopyWith(
+          CattleEntry value, $Res Function(CattleEntry) then) =
+      _$CattleEntryCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: '_id') Map<String, String> dataBaseId,
       String tagNumber,
@@ -107,12 +108,12 @@ abstract class $CattleCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CattleCopyWithImpl<$Res> implements $CattleCopyWith<$Res> {
-  _$CattleCopyWithImpl(this._value, this._then);
+class _$CattleEntryCopyWithImpl<$Res> implements $CattleEntryCopyWith<$Res> {
+  _$CattleEntryCopyWithImpl(this._value, this._then);
 
-  final Cattle _value;
+  final CattleEntry _value;
   // ignore: unused_field
-  final $Res Function(Cattle) _then;
+  final $Res Function(CattleEntry) _then;
 
   @override
   $Res call({
@@ -172,9 +173,11 @@ class _$CattleCopyWithImpl<$Res> implements $CattleCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$CattleCopyWith<$Res> implements $CattleCopyWith<$Res> {
-  factory _$CattleCopyWith(_Cattle value, $Res Function(_Cattle) then) =
-      __$CattleCopyWithImpl<$Res>;
+abstract class _$CattleEntryCopyWith<$Res>
+    implements $CattleEntryCopyWith<$Res> {
+  factory _$CattleEntryCopyWith(
+          _CattleEntry value, $Res Function(_CattleEntry) then) =
+      __$CattleEntryCopyWithImpl<$Res>;
   @override
   $Res call(
       {@JsonKey(name: '_id') Map<String, String> dataBaseId,
@@ -197,13 +200,14 @@ abstract class _$CattleCopyWith<$Res> implements $CattleCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$CattleCopyWithImpl<$Res> extends _$CattleCopyWithImpl<$Res>
-    implements _$CattleCopyWith<$Res> {
-  __$CattleCopyWithImpl(_Cattle _value, $Res Function(_Cattle) _then)
-      : super(_value, (v) => _then(v as _Cattle));
+class __$CattleEntryCopyWithImpl<$Res> extends _$CattleEntryCopyWithImpl<$Res>
+    implements _$CattleEntryCopyWith<$Res> {
+  __$CattleEntryCopyWithImpl(
+      _CattleEntry _value, $Res Function(_CattleEntry) _then)
+      : super(_value, (v) => _then(v as _CattleEntry));
 
   @override
-  _Cattle get _value => super._value as _Cattle;
+  _CattleEntry get _value => super._value as _CattleEntry;
 
   @override
   $Res call({
@@ -222,7 +226,7 @@ class __$CattleCopyWithImpl<$Res> extends _$CattleCopyWithImpl<$Res>
     Object isSold = freezed,
     Object isDead = freezed,
   }) {
-    return _then(_Cattle(
+    return _then(_CattleEntry(
       dataBaseId == freezed
           ? _value.dataBaseId
           : dataBaseId as Map<String, String>,
@@ -248,8 +252,8 @@ class __$CattleCopyWithImpl<$Res> extends _$CattleCopyWithImpl<$Res>
 @JsonSerializable()
 
 /// @nodoc
-class _$_Cattle implements _Cattle {
-  const _$_Cattle(
+class _$_CattleEntry implements _CattleEntry {
+  const _$_CattleEntry(
       [@JsonKey(name: '_id') this.dataBaseId,
       this.tagNumber,
       this.type,
@@ -267,8 +271,8 @@ class _$_Cattle implements _Cattle {
       : assert(isSold != null),
         assert(isDead != null);
 
-  factory _$_Cattle.fromJson(Map<String, dynamic> json) =>
-      _$_$_CattleFromJson(json);
+  factory _$_CattleEntry.fromJson(Map<String, dynamic> json) =>
+      _$_$_CattleEntryFromJson(json);
 
   @override
   @JsonKey(name: '_id')
@@ -304,13 +308,13 @@ class _$_Cattle implements _Cattle {
 
   @override
   String toString() {
-    return 'Cattle(dataBaseId: $dataBaseId, tagNumber: $tagNumber, type: $type, gender: $gender, boughtFrom: $boughtFrom, price: $price, age: $age, childrenCount: $childrenCount, numberOfTeeth: $numberOfTeeth, breed: $breed, milkPromised: $milkPromised, broughtInDate: $broughtInDate, isSold: $isSold, isDead: $isDead)';
+    return 'CattleEntry(dataBaseId: $dataBaseId, tagNumber: $tagNumber, type: $type, gender: $gender, boughtFrom: $boughtFrom, price: $price, age: $age, childrenCount: $childrenCount, numberOfTeeth: $numberOfTeeth, breed: $breed, milkPromised: $milkPromised, broughtInDate: $broughtInDate, isSold: $isSold, isDead: $isDead)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Cattle &&
+        (other is _CattleEntry &&
             (identical(other.dataBaseId, dataBaseId) ||
                 const DeepCollectionEquality()
                     .equals(other.dataBaseId, dataBaseId)) &&
@@ -368,17 +372,17 @@ class _$_Cattle implements _Cattle {
 
   @JsonKey(ignore: true)
   @override
-  _$CattleCopyWith<_Cattle> get copyWith =>
-      __$CattleCopyWithImpl<_Cattle>(this, _$identity);
+  _$CattleEntryCopyWith<_CattleEntry> get copyWith =>
+      __$CattleEntryCopyWithImpl<_CattleEntry>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_CattleToJson(this);
+    return _$_$_CattleEntryToJson(this);
   }
 }
 
-abstract class _Cattle implements Cattle {
-  const factory _Cattle(
+abstract class _CattleEntry implements CattleEntry {
+  const factory _CattleEntry(
       [@JsonKey(name: '_id') Map<String, String> dataBaseId,
       String tagNumber,
       CattleType type,
@@ -392,9 +396,10 @@ abstract class _Cattle implements Cattle {
       double milkPromised,
       DateTime broughtInDate,
       bool isSold,
-      bool isDead]) = _$_Cattle;
+      bool isDead]) = _$_CattleEntry;
 
-  factory _Cattle.fromJson(Map<String, dynamic> json) = _$_Cattle.fromJson;
+  factory _CattleEntry.fromJson(Map<String, dynamic> json) =
+      _$_CattleEntry.fromJson;
 
   @override
   @JsonKey(name: '_id')
@@ -427,5 +432,5 @@ abstract class _Cattle implements Cattle {
   bool get isDead;
   @override
   @JsonKey(ignore: true)
-  _$CattleCopyWith<_Cattle> get copyWith;
+  _$CattleEntryCopyWith<_CattleEntry> get copyWith;
 }

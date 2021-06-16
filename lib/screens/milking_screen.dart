@@ -1,4 +1,4 @@
-import 'package:dairy_farm/application/notifier/milking_data.dart';
+import 'package:dairy_farm/application/notifier/milking_data_notifier.dart';
 import 'package:dairy_farm/components/milking_form.dart';
 import 'package:dairy_farm/components/my_scaffold.dart';
 import 'package:flutter/material.dart';

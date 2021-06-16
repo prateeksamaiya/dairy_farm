@@ -6,8 +6,8 @@ part of 'cattle.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Cattle _$_$_CattleFromJson(Map<String, dynamic> json) {
-  return _$_Cattle(
+_$_CattleEntry _$_$_CattleEntryFromJson(Map<String, dynamic> json) {
+  return _$_CattleEntry(
     (json['_id'] as Map<String, dynamic>)?.map(
       (k, e) => MapEntry(k, e as String),
     ),
@@ -31,7 +31,8 @@ _$_Cattle _$_$_CattleFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$_$_CattleToJson(_$_Cattle instance) => <String, dynamic>{
+Map<String, dynamic> _$_$_CattleEntryToJson(_$_CattleEntry instance) =>
+    <String, dynamic>{
       '_id': instance.dataBaseId,
       'tagNumber': instance.tagNumber,
       'type': _$CattleTypeEnumMap[instance.type],

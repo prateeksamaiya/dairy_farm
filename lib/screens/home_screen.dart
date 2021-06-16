@@ -1,4 +1,4 @@
-import 'package:dairy_farm/application/notifier/milking_data.dart';
+import 'package:dairy_farm/application/notifier/milking_data_notifier.dart';
 import 'package:dairy_farm/components/aggreagatedDataTable.dart';
 import 'package:dairy_farm/components/my_scaffold.dart';
 import 'package:dairy_farm/enums/cattle_type.dart';
@@ -48,7 +48,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   Future<AsyncValue> getTodayEntries(context) async {
-    return await context(serverClient).populateFromServer();
+    return await context(milkingClient).populateFromServer();
   }
 
   @override

@@ -9,8 +9,8 @@ part 'cattle.freezed.dart';
 part 'cattle.g.dart';
 
 @freezed
-abstract class Cattle with _$Cattle {
-  const factory Cattle([
+abstract class CattleEntry with _$CattleEntry {
+  const factory CattleEntry([
     @JsonKey(name: '_id') Map<String,String> dataBaseId,
     String tagNumber,
     CattleType type,
@@ -25,7 +25,7 @@ abstract class Cattle with _$Cattle {
     DateTime broughtInDate,
     @Default(false) bool isSold,
     @Default(false) bool isDead,
-  ]) = _Cattle;
+  ]) = _CattleEntry;
 
-  factory Cattle.fromJson(Map<String, dynamic> json) => _$CattleFromJson(json);
+  factory CattleEntry.fromJson(Map<String, dynamic> json) => _$CattleEntryFromJson(json);
 }

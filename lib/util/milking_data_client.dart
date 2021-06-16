@@ -15,7 +15,7 @@ class MilkingDataClient {
 
 
   Future<List<MilkingEntry>> populateFromServer([DateTime from ,DateTime to]) async {
-    String path = "/fetch/record/milking/today";
+    String path = "/milking/fetch/record/today";
     var queryParameters = {
       'from':from!=null?from.toUtc().toIso8601String():ApplicationUtil.midnight().toUtc().toIso8601String(),
       'to': to!=null?to.toUtc().toIso8601String():ApplicationUtil.midnight().add(Duration(days: 1)).toUtc().toIso8601String(),

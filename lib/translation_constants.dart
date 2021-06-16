@@ -13,6 +13,7 @@ const String title=  "title";
 const String home=  "home";
 const String milking=  "milking";
 const String milkingDetails=  "milking_details";
+const String cattle_management=  "cattle_management";
 const String cattleNumberEmptyMessage=  "cattle_number_empty_message";
 const String milkQuantityEmptyMessage=  "milk_quantity_empty_message";
 const String manishSamaiya=  "manish_samaiya";
