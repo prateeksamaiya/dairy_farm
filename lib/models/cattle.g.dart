@@ -14,9 +14,16 @@ _$_CattleEntry _$_$_CattleEntryFromJson(Map<String, dynamic> json) {
     json['tagNumber'] as String,
     _$enumDecodeNullable(_$CattleTypeEnumMap, json['type']),
     _$enumDecodeNullable(_$CattleGenderEnumMap, json['gender']),
-    json['boughtFrom'] == null
+    json['sellerDairy'] as String,
+    json['currentStatus'] == null
         ? null
-        : DairyFarm.fromJson(json['boughtFrom'] as Map<String, dynamic>),
+        : CattleStatus.fromJson(json['currentStatus'] as Map<String, dynamic>),
+    (json['statusHistory'] as List)
+            ?.map((e) => e == null
+                ? null
+                : CattleStatus.fromJson(e as Map<String, dynamic>))
+            ?.toList() ??
+        [],
     json['price'] as int,
     json['age'] as int,
     json['childrenCount'] as int,
@@ -37,7 +44,9 @@ Map<String, dynamic> _$_$_CattleEntryToJson(_$_CattleEntry instance) =>
       'tagNumber': instance.tagNumber,
       'type': _$CattleTypeEnumMap[instance.type],
       'gender': _$CattleGenderEnumMap[instance.gender],
-      'boughtFrom': instance.boughtFrom,
+      'sellerDairy': instance.sellerDairy,
+      'currentStatus': instance.currentStatus,
+      'statusHistory': instance.statusHistory,
       'price': instance.price,
       'age': instance.age,
       'childrenCount': instance.childrenCount,

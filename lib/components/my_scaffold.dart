@@ -6,16 +6,19 @@ import 'main_drawer.dart';
 class MyScaffold extends StatelessWidget {
   final Widget body;
   final Function onPressed;
+  final List<Widget> actions;
 
-  MyScaffold(this.body, [this.onPressed]);
+  MyScaffold(this.body, [this.onPressed,this.actions]);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(ApplicationUtil.translate(title)),
+        actions: actions,
       ),
       body: body,
+
       drawer: MainDrawer(),
       floatingActionButton: onPressed==null?null:FloatingActionButton(
         child: Icon(Icons.refresh),

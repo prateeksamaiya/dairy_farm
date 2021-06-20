@@ -22,7 +22,9 @@ class _$CattleEntryTearOff {
       String tagNumber,
       CattleType type,
       CattleGender gender,
-      DairyFarm boughtFrom,
+      String sellerDairy,
+      CattleStatus currentStatus,
+      List<CattleStatus> statusHistory = const [],
       int price,
       int age,
       int childrenCount,
@@ -37,7 +39,9 @@ class _$CattleEntryTearOff {
       tagNumber,
       type,
       gender,
-      boughtFrom,
+      sellerDairy,
+      currentStatus,
+      statusHistory,
       price,
       age,
       childrenCount,
@@ -67,7 +71,9 @@ mixin _$CattleEntry {
   String get tagNumber;
   CattleType get type;
   CattleGender get gender;
-  DairyFarm get boughtFrom;
+  String get sellerDairy;
+  CattleStatus get currentStatus;
+  List<CattleStatus> get statusHistory;
   int get price;
   int get age;
   int get childrenCount;
@@ -93,7 +99,9 @@ abstract class $CattleEntryCopyWith<$Res> {
       String tagNumber,
       CattleType type,
       CattleGender gender,
-      DairyFarm boughtFrom,
+      String sellerDairy,
+      CattleStatus currentStatus,
+      List<CattleStatus> statusHistory,
       int price,
       int age,
       int childrenCount,
@@ -104,7 +112,7 @@ abstract class $CattleEntryCopyWith<$Res> {
       bool isSold,
       bool isDead});
 
-  $DairyFarmCopyWith<$Res> get boughtFrom;
+  $CattleStatusCopyWith<$Res> get currentStatus;
 }
 
 /// @nodoc
@@ -121,7 +129,9 @@ class _$CattleEntryCopyWithImpl<$Res> implements $CattleEntryCopyWith<$Res> {
     Object tagNumber = freezed,
     Object type = freezed,
     Object gender = freezed,
-    Object boughtFrom = freezed,
+    Object sellerDairy = freezed,
+    Object currentStatus = freezed,
+    Object statusHistory = freezed,
     Object price = freezed,
     Object age = freezed,
     Object childrenCount = freezed,
@@ -139,8 +149,14 @@ class _$CattleEntryCopyWithImpl<$Res> implements $CattleEntryCopyWith<$Res> {
       tagNumber: tagNumber == freezed ? _value.tagNumber : tagNumber as String,
       type: type == freezed ? _value.type : type as CattleType,
       gender: gender == freezed ? _value.gender : gender as CattleGender,
-      boughtFrom:
-          boughtFrom == freezed ? _value.boughtFrom : boughtFrom as DairyFarm,
+      sellerDairy:
+          sellerDairy == freezed ? _value.sellerDairy : sellerDairy as String,
+      currentStatus: currentStatus == freezed
+          ? _value.currentStatus
+          : currentStatus as CattleStatus,
+      statusHistory: statusHistory == freezed
+          ? _value.statusHistory
+          : statusHistory as List<CattleStatus>,
       price: price == freezed ? _value.price : price as int,
       age: age == freezed ? _value.age : age as int,
       childrenCount: childrenCount == freezed
@@ -162,12 +178,12 @@ class _$CattleEntryCopyWithImpl<$Res> implements $CattleEntryCopyWith<$Res> {
   }
 
   @override
-  $DairyFarmCopyWith<$Res> get boughtFrom {
-    if (_value.boughtFrom == null) {
+  $CattleStatusCopyWith<$Res> get currentStatus {
+    if (_value.currentStatus == null) {
       return null;
     }
-    return $DairyFarmCopyWith<$Res>(_value.boughtFrom, (value) {
-      return _then(_value.copyWith(boughtFrom: value));
+    return $CattleStatusCopyWith<$Res>(_value.currentStatus, (value) {
+      return _then(_value.copyWith(currentStatus: value));
     });
   }
 }
@@ -184,7 +200,9 @@ abstract class _$CattleEntryCopyWith<$Res>
       String tagNumber,
       CattleType type,
       CattleGender gender,
-      DairyFarm boughtFrom,
+      String sellerDairy,
+      CattleStatus currentStatus,
+      List<CattleStatus> statusHistory,
       int price,
       int age,
       int childrenCount,
@@ -196,7 +214,7 @@ abstract class _$CattleEntryCopyWith<$Res>
       bool isDead});
 
   @override
-  $DairyFarmCopyWith<$Res> get boughtFrom;
+  $CattleStatusCopyWith<$Res> get currentStatus;
 }
 
 /// @nodoc
@@ -215,7 +233,9 @@ class __$CattleEntryCopyWithImpl<$Res> extends _$CattleEntryCopyWithImpl<$Res>
     Object tagNumber = freezed,
     Object type = freezed,
     Object gender = freezed,
-    Object boughtFrom = freezed,
+    Object sellerDairy = freezed,
+    Object currentStatus = freezed,
+    Object statusHistory = freezed,
     Object price = freezed,
     Object age = freezed,
     Object childrenCount = freezed,
@@ -233,7 +253,13 @@ class __$CattleEntryCopyWithImpl<$Res> extends _$CattleEntryCopyWithImpl<$Res>
       tagNumber == freezed ? _value.tagNumber : tagNumber as String,
       type == freezed ? _value.type : type as CattleType,
       gender == freezed ? _value.gender : gender as CattleGender,
-      boughtFrom == freezed ? _value.boughtFrom : boughtFrom as DairyFarm,
+      sellerDairy == freezed ? _value.sellerDairy : sellerDairy as String,
+      currentStatus == freezed
+          ? _value.currentStatus
+          : currentStatus as CattleStatus,
+      statusHistory == freezed
+          ? _value.statusHistory
+          : statusHistory as List<CattleStatus>,
       price == freezed ? _value.price : price as int,
       age == freezed ? _value.age : age as int,
       childrenCount == freezed ? _value.childrenCount : childrenCount as int,
@@ -252,13 +278,15 @@ class __$CattleEntryCopyWithImpl<$Res> extends _$CattleEntryCopyWithImpl<$Res>
 @JsonSerializable()
 
 /// @nodoc
-class _$_CattleEntry implements _CattleEntry {
+class _$_CattleEntry extends _CattleEntry {
   const _$_CattleEntry(
       [@JsonKey(name: '_id') this.dataBaseId,
       this.tagNumber,
       this.type,
       this.gender,
-      this.boughtFrom,
+      this.sellerDairy,
+      this.currentStatus,
+      this.statusHistory = const [],
       this.price,
       this.age,
       this.childrenCount,
@@ -268,8 +296,10 @@ class _$_CattleEntry implements _CattleEntry {
       this.broughtInDate,
       this.isSold = false,
       this.isDead = false])
-      : assert(isSold != null),
-        assert(isDead != null);
+      : assert(statusHistory != null),
+        assert(isSold != null),
+        assert(isDead != null),
+        super._();
 
   factory _$_CattleEntry.fromJson(Map<String, dynamic> json) =>
       _$_$_CattleEntryFromJson(json);
@@ -284,7 +314,12 @@ class _$_CattleEntry implements _CattleEntry {
   @override
   final CattleGender gender;
   @override
-  final DairyFarm boughtFrom;
+  final String sellerDairy;
+  @override
+  final CattleStatus currentStatus;
+  @JsonKey(defaultValue: const [])
+  @override
+  final List<CattleStatus> statusHistory;
   @override
   final int price;
   @override
@@ -308,7 +343,7 @@ class _$_CattleEntry implements _CattleEntry {
 
   @override
   String toString() {
-    return 'CattleEntry(dataBaseId: $dataBaseId, tagNumber: $tagNumber, type: $type, gender: $gender, boughtFrom: $boughtFrom, price: $price, age: $age, childrenCount: $childrenCount, numberOfTeeth: $numberOfTeeth, breed: $breed, milkPromised: $milkPromised, broughtInDate: $broughtInDate, isSold: $isSold, isDead: $isDead)';
+    return 'CattleEntry(dataBaseId: $dataBaseId, tagNumber: $tagNumber, type: $type, gender: $gender, sellerDairy: $sellerDairy, currentStatus: $currentStatus, statusHistory: $statusHistory, price: $price, age: $age, childrenCount: $childrenCount, numberOfTeeth: $numberOfTeeth, breed: $breed, milkPromised: $milkPromised, broughtInDate: $broughtInDate, isSold: $isSold, isDead: $isDead)';
   }
 
   @override
@@ -325,9 +360,15 @@ class _$_CattleEntry implements _CattleEntry {
                 const DeepCollectionEquality().equals(other.type, type)) &&
             (identical(other.gender, gender) ||
                 const DeepCollectionEquality().equals(other.gender, gender)) &&
-            (identical(other.boughtFrom, boughtFrom) ||
+            (identical(other.sellerDairy, sellerDairy) ||
                 const DeepCollectionEquality()
-                    .equals(other.boughtFrom, boughtFrom)) &&
+                    .equals(other.sellerDairy, sellerDairy)) &&
+            (identical(other.currentStatus, currentStatus) ||
+                const DeepCollectionEquality()
+                    .equals(other.currentStatus, currentStatus)) &&
+            (identical(other.statusHistory, statusHistory) ||
+                const DeepCollectionEquality()
+                    .equals(other.statusHistory, statusHistory)) &&
             (identical(other.price, price) ||
                 const DeepCollectionEquality().equals(other.price, price)) &&
             (identical(other.age, age) ||
@@ -359,7 +400,9 @@ class _$_CattleEntry implements _CattleEntry {
       const DeepCollectionEquality().hash(tagNumber) ^
       const DeepCollectionEquality().hash(type) ^
       const DeepCollectionEquality().hash(gender) ^
-      const DeepCollectionEquality().hash(boughtFrom) ^
+      const DeepCollectionEquality().hash(sellerDairy) ^
+      const DeepCollectionEquality().hash(currentStatus) ^
+      const DeepCollectionEquality().hash(statusHistory) ^
       const DeepCollectionEquality().hash(price) ^
       const DeepCollectionEquality().hash(age) ^
       const DeepCollectionEquality().hash(childrenCount) ^
@@ -381,13 +424,16 @@ class _$_CattleEntry implements _CattleEntry {
   }
 }
 
-abstract class _CattleEntry implements CattleEntry {
+abstract class _CattleEntry extends CattleEntry {
+  const _CattleEntry._() : super._();
   const factory _CattleEntry(
       [@JsonKey(name: '_id') Map<String, String> dataBaseId,
       String tagNumber,
       CattleType type,
       CattleGender gender,
-      DairyFarm boughtFrom,
+      String sellerDairy,
+      CattleStatus currentStatus,
+      List<CattleStatus> statusHistory,
       int price,
       int age,
       int childrenCount,
@@ -411,7 +457,11 @@ abstract class _CattleEntry implements CattleEntry {
   @override
   CattleGender get gender;
   @override
-  DairyFarm get boughtFrom;
+  String get sellerDairy;
+  @override
+  CattleStatus get currentStatus;
+  @override
+  List<CattleStatus> get statusHistory;
   @override
   int get price;
   @override
